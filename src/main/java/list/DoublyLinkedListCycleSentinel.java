@@ -39,8 +39,48 @@ public class DoublyLinkedListCycleSentinel implements Iterable<Integer> {
         b.prev = added;
     }
 
-    private IllegalArgumentException illegalIndex(int index) {
-        return new IllegalArgumentException(String.format("index [%d] is illegal%n", index));
+    public void removeFirst() {
+        Node removed = sentinel.next;
+        if (removed == sentinel) {
+            throw new IllegalArgumentException("Illegal operation: the node to be removed is the sentinel.");
+        }
+        Node a = sentinel;
+        Node b = removed.next;
+        a.next = b;
+        b.prev = a;
+    }
+
+    public void removeLast() {
+        Node removed = sentinel.prev;
+        if (removed == sentinel) {
+            throw new IllegalArgumentException("Illegal operation: the node to be removed is the sentinel.");
+        }
+        Node a = removed.prev;
+        Node b = sentinel;
+        a.next = b;
+        b.prev = a;
+    }
+
+    public void removeByValue(int value) {
+        Node removed = findByValue(value);
+        if (removed == null) {
+            return; //No need to remove
+        }
+        Node a = removed.prev;
+        Node b = removed.next;
+        a.next = b;
+        b.prev = a;
+    }
+
+    private Node findByValue(int value) {
+        Node p = sentinel.next;
+        while (p != sentinel) {
+            if (p.value == value) {
+                return p;
+            }
+            p = p.next;
+        }
+        return null;
     }
 
     @Override
