@@ -1,5 +1,6 @@
 package list;
 
+import com.sun.jdi.Value;
 import org.junit.Test;
 
 public class SinglyLinkedListTest {
@@ -54,7 +55,7 @@ public class SinglyLinkedListTest {
         list.addLast(4); //3
         //4
 
-        list.insert(0,5);
+        list.insert(0, 5);
         for (Integer v : list) {
             System.out.println(v);
         }
@@ -131,12 +132,16 @@ public class SinglyLinkedListTest {
     }
 
     @Test
-    public void testLoop3(){
+    public void testLoop3() {
         SinglyLinkedList list = new SinglyLinkedList();
         list.addLast(1);
         list.addLast(2);
         list.addLast(3);
         list.addLast(4);
-        list.loop3();
+        list.loop3(value -> {
+            System.out.println("Before: " + value);
+        }, value -> {
+            System.out.println("After: " + value);
+        });
     }
 }

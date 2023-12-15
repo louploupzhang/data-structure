@@ -56,16 +56,17 @@ public class SinglyLinkedList implements Iterable<Integer> {
         }
     }
 
-    public void loop3() {
-        recursion(head);
+    public void loop3(Consumer<Integer> before, Consumer<Integer> after) {
+        recursion(head, before, after);
     }
 
-    public void recursion(Node curr) {
+    public void recursion(Node curr, Consumer<Integer> before, Consumer<Integer> after) {
         if (curr == null) {
             return;
         }
-        System.out.println(curr.value);
-        recursion(curr.next);
+        before.accept(curr.value);
+        recursion(curr.next, before, after);
+        after.accept(curr.value);
     }
 
     private Node findLast() {
