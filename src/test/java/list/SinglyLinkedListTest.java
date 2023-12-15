@@ -129,4 +129,14 @@ public class SinglyLinkedListTest {
         list4.addLast(4); //3
         list4.remove(4);
     }
+
+    @Test
+    public void testLoop3(){
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+        list.addLast(4);
+        list.loop3();
+    }
 }
