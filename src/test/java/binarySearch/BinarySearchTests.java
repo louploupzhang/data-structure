@@ -113,4 +113,22 @@ public class BinarySearchTests {
         assertEquals(-1, BinarySearch.binarySearchRightmost1(a, 3));
         assertEquals(-1, BinarySearch.binarySearchRightmost1(a, 99));
     }
+
+    @Test
+    @DisplayName("binarySearchRecursion")
+    public void test8(){
+        int[] a = {7,13,21,33,38,44,52,53};
+        assertEquals(0, recursion.BinarySearch.search(a,7));
+        assertEquals(1, recursion.BinarySearch.search(a,13));
+        assertEquals(2, recursion.BinarySearch.search(a,21));
+        assertEquals(3, recursion.BinarySearch.search(a,33));
+        assertEquals(4, recursion.BinarySearch.search(a,38));
+        assertEquals(5, recursion.BinarySearch.search(a,44));
+        assertEquals(6, recursion.BinarySearch.search(a,52));
+        assertEquals(7, recursion.BinarySearch.search(a,53));
+
+        assertEquals(-1, recursion.BinarySearch.search(a,0));
+        assertEquals(-1, recursion.BinarySearch.search(a,15));
+        assertEquals(-1, recursion.BinarySearch.search(a,99));
+    }
 }
