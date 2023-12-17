@@ -17,8 +17,24 @@ public class InsertionSort {
             i--;
         }
         //Insertion position found
-        a[i + 1] = t;
+        if (i + 1 != low) {
+            a[i + 1] = t;
+        }
 
         insertion(a, low + 1);
+    }
+
+    private static void insertion2(int[] a, int low) {
+        if (low == a.length) return;
+
+        int i = low - 1;
+        while (i >= 0 && a[i] > a[i + 1]) {
+            int t = a[i];
+            a[i] = a[i + 1];
+            a[i + 1] = t;
+            i--;
+        }
+
+        insertion2(a, low + 1);
     }
 }
