@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 
+import java.util.Arrays;
+
 import static recursion.InsertionSort.sort;
 
 public class InsertionSort {
@@ -26,6 +28,5 @@ public class InsertionSort {
         int[] a4 = {1, 2, 3, 4, 5};
         sort(a4);
         Assertions.assertArrayEquals(expected, a4);
-
     }
 }
