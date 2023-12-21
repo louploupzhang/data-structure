@@ -1,9 +1,16 @@
 package recursion;
 
 public class PascalTriangle {
-    private static int element(int i, int j) {
-        if (j == 0 || i == j) return 1;
-        return element(i - 1, j - 1) + element(i - 1, j);
+    private static int element1(int[][] triangle, int i, int j) {
+        if (triangle[i][j] > 0) { //The current element is in the cache
+            return triangle[i][j];
+        }
+        if (j == 0 || i == j) {
+            triangle[i][j] = 1;
+            return 1;
+        }
+        triangle[i][j] = element1(triangle, i - 1, j - 1) + element1(triangle, i - 1, j);
+        return triangle[i][j];
     }
 
     private static void printSpace(int n, int i) {
@@ -13,17 +20,19 @@ public class PascalTriangle {
         }
     }
 
-    private static void print(int n) {
-        for (int i = 0; i < n; i++) {
-            printSpace(n, i);
+    private static void print1(int n) {
+        int[][] triangle = new int[n][]; //col
+        for (int i = 0; i < n; i++) { //row
+            triangle[i] = new int[i + 1];
+//            printSpace(n, i);
             for (int j = 0; j <= i; j++) {
-                System.out.printf("%-4d", element(i, j));
+                System.out.printf("%-4d", element1(triangle, i, j));
             }
             System.out.println();
         }
     }
 
     public static void main(String[] args) {
-        print(10);
+        print1(6);
     }
 }
