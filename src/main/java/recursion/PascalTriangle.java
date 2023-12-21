@@ -32,7 +32,29 @@ public class PascalTriangle {
         }
     }
 
+    private static void createRow(int[] row, int i) {
+        if (i == 0) {
+            row[0] = 1;
+            return;
+        }
+        for (int j = i; j > 0; j--) {
+            row[j] = row[j] + row[j - 1];
+        }
+    }
+
+    private static void print2(int n) {
+        int[] row = new int[n];
+        for (int i = 0; i < n; i++) { //row
+            createRow(row, i);
+//            printSpace(n, i);
+            for (int j = 0; j <= i; j++) {
+                System.out.printf("%-4d", row[j]);
+            }
+            System.out.println();
+        }
+    }
+
     public static void main(String[] args) {
-        print1(6);
+        print2(6);
     }
 }
