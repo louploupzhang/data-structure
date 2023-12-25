@@ -11,10 +11,7 @@ class ListNode {
 
     @Override
     public String toString() {
-        return "ListNode{" +
-                "val=" + val +
-                ", next=" + next +
-                '}';
+        return val + "->" + next;
     }
 }
 
@@ -51,18 +48,29 @@ public class ReverseSinglyLinkedList {
         return n1;
     }
 
-    //Method 2: move elements
+    //Method 2: move nodes
     public ListNode reverseList2(ListNode head) {
         List list1 = new List(head);
         List list2 = new List(null);
-        while (true){
+        while (true) {
             ListNode first = list1.removeFirst();
-            if(first==null){
+            if (first == null) {
                 break;
             }
             list2.addFirst(first);
         }
         return list2.head;
+    }
+
+    //Method 3: recursion
+    public ListNode reverseList3(ListNode p) {
+        if (p == null || p.next == null) {
+            return p; //Last node
+        }
+        ListNode last = reverseList3(p.next);
+        p.next.next = p; //Reverse direction, ex:  p=4, p.next=5, 4->5  5->4
+        p.next = null; //Break the circle since 4->5 and 5->4
+        return last;
     }
 
     public static void main(String[] args) {
@@ -73,7 +81,8 @@ public class ReverseSinglyLinkedList {
         ListNode o1 = new ListNode(1, o2);
         System.out.println(o1);
 //        ListNode n1 = new ReverseSinglyLinkedList().reverseList(o1);
-        ListNode n1 = new ReverseSinglyLinkedList().reverseList2(o1);
+//        ListNode n1 = new ReverseSinglyLinkedList().reverseList2(o1);
+        ListNode n1 = new ReverseSinglyLinkedList().reverseList3(o1);
         System.out.println(n1);
     }
 }
