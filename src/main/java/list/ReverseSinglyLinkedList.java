@@ -16,6 +16,31 @@ class ListNode {
 }
 
 public class ReverseSinglyLinkedList {
+    //Method 1: create new list and copy values
+    public ListNode reverseList1(ListNode o1) {
+        ListNode n1 = null;
+        ListNode p = o1;
+        while (p != null) {
+            n1 = new ListNode(p.val, n1);
+            p = p.next;
+        }
+        return n1;
+    }
+
+    //Method 2: move nodes (object-oriented)
+    public ListNode reverseList2(ListNode head) {
+        List list1 = new List(head);
+        List list2 = new List(null);
+        while (true) {
+            ListNode first = list1.removeFirst();
+            if (first == null) {
+                break;
+            }
+            list2.addFirst(first);
+        }
+        return list2.head;
+    }
+
     static class List {
         ListNode head;
 
@@ -37,38 +62,13 @@ public class ReverseSinglyLinkedList {
         }
     }
 
-    //Method 1: create new list and copy values
-    public ListNode reverseList1(ListNode o1) {
-        ListNode n1 = null;
-        ListNode p = o1;
-        while (p != null) {
-            n1 = new ListNode(p.val, n1);
-            p = p.next;
-        }
-        return n1;
-    }
-
-    //Method 2: move nodes
-    public ListNode reverseList2(ListNode head) {
-        List list1 = new List(head);
-        List list2 = new List(null);
-        while (true) {
-            ListNode first = list1.removeFirst();
-            if (first == null) {
-                break;
-            }
-            list2.addFirst(first);
-        }
-        return list2.head;
-    }
-
     //Method 3: recursion
     public ListNode reverseList3(ListNode p) {
         //Boundary case
         if (p == null || p.next == null) {
             return p; //Last node
         }
-        
+
         ListNode last = reverseList3(p.next);
         p.next.next = p; //Reverse direction, ex:  p=4, p.next=5, 4->5  5->4
         p.next = null; //Break the circle since 4->5 and 5->4
@@ -84,7 +84,7 @@ public class ReverseSinglyLinkedList {
 
         ListNode o2 = o1.next;
         ListNode n1 = o1;
-        while (o2 != null){
+        while (o2 != null) {
             //Break o2 from the list, make o1 points to o2.next
             o1.next = o2.next;
             //Make o2 the head of the new list
@@ -93,6 +93,26 @@ public class ReverseSinglyLinkedList {
             n1 = o2;
             //Reset o2's position (old list, 2nd node)
             o2 = o1.next;
+        }
+        return n1;
+    }
+
+    //Method 5: move nodes (procedural oriented)
+    public ListNode reverseList5(ListNode o1) {
+        //Boundary case
+        if (o1 == null || o1.next == null) {
+            return o1;
+        }
+
+        ListNode n1 = null; //This means new list doesn't have elements; o1 = head node of old list
+        while (o1 != null) {
+            //o2 points to o1.next
+            ListNode o2 = o1.next;
+            //Move o1 to the new list as head node
+            o1.next = n1;
+            n1 = o1; //n1 should be the 1st node of the new list
+            //Reset o1's position (1st node of the old list)
+            o1 = o2;
         }
         return n1;
     }
@@ -107,7 +127,8 @@ public class ReverseSinglyLinkedList {
 //        ListNode n1 = new ReverseSinglyLinkedList().reverseList(o1);
 //        ListNode n1 = new ReverseSinglyLinkedList().reverseList2(o1);
 //        ListNode n1 = new ReverseSinglyLinkedList().reverseList3(o1);
-        ListNode n1 = new ReverseSinglyLinkedList().reverseList4(o1);
+//        ListNode n1 = new ReverseSinglyLinkedList().reverseList4(o1);
+        ListNode n1 = new ReverseSinglyLinkedList().reverseList5(o1);
         System.out.println(n1);
     }
 }
